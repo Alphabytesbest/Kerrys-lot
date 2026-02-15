@@ -3,180 +3,76 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Wilson Resale Garage</title>
-  <meta name="description" content="Modern rustic resale — quality used items, honest descriptions, local pickup or shipping." />
-
-  <!-- Free fonts (optional). If you want zero external calls, delete these 2 lines. -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <title>Kerry’s Lot — Modern Rustic Resale</title>
+  <meta name="description" content="Modern rustic resale catalog." />
 
   <style>
     :root{
-      /* Harley-ish: charcoal, leather, warm cream, ember accent */
-      --bg: #0c0d0f;
+      --bg:#0c0d0f;
       --panel: rgba(255,255,255,0.05);
       --panel2: rgba(255,255,255,0.03);
-      --text: #f3efe6;
+      --text:#f3efe6;
       --muted: rgba(243,239,230,0.72);
       --line: rgba(243,239,230,0.12);
-
-      --leather: #5a3b23;
-      --rust: #a65a2a;
-      --ember: #ff6a2a;
-      --steel: #9aa3ad;
-
-      --radius: 18px;
+      --ember:#ff6a2a;
+      --leather:#5a3b23;
+      --radius:18px;
       --shadow: 0 18px 70px rgba(0,0,0,0.55);
       --shadow2: 0 10px 30px rgba(0,0,0,0.45);
-
-      --title: "Oswald", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      --body: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --title: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --body: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     }
 
-    /* Subtle “rustic texture” without images (uses layered gradients) */
+    *{ box-sizing:border-box; }
     body{
       margin:0;
       color: var(--text);
       font-family: var(--body);
       background:
-        radial-gradient(1200px 800px at 20% -10%, rgba(166,90,42,0.14), transparent 60%),
-        radial-gradient(900px 600px at 80% 0%, rgba(154,163,173,0.10), transparent 55%),
-        linear-gradient(180deg, rgba(255,255,255,0.04), transparent 22%),
-        repeating-linear-gradient(90deg,
-          rgba(255,255,255,0.02) 0px,
-          rgba(255,255,255,0.02) 1px,
-          transparent 1px,
-          transparent 7px
-        ),
+        radial-gradient(1200px 800px at 20% -10%, rgba(255,106,42,0.13), transparent 60%),
+        radial-gradient(900px 600px at 80% 0%, rgba(255,255,255,0.06), transparent 55%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 7px),
         linear-gradient(180deg, #07080a 0%, #0c0d0f 40%, #07080a 100%);
-      min-height: 100vh;
+      min-height:100vh;
     }
-
     a{ color:inherit; text-decoration:none; }
-    .container{ width:min(1120px, 92vw); margin:0 auto; }
+    .container{ width:min(1200px, 94vw); margin:0 auto; }
 
     /* Top bar */
     .topbar{
-      position:sticky; top:0; z-index:50;
+      position:sticky; top:0; z-index:40;
       backdrop-filter: blur(12px);
       background: rgba(12,13,15,0.72);
       border-bottom: 1px solid var(--line);
     }
     .topbar-inner{
       display:flex; align-items:center; justify-content:space-between;
-      padding: 14px 0;
-      gap:16px;
+      gap:12px; padding: 14px 0;
     }
     .brand{
-      display:flex; align-items:center; gap:12px;
+      display:flex; align-items:center; gap:10px;
+      font-weight:900; letter-spacing:.06em; text-transform:uppercase;
     }
-    .badge{
-      width:40px; height:40px; border-radius: 12px;
+    .logo{
+      width:38px; height:38px; border-radius:12px;
       background:
         radial-gradient(circle at 30% 30%, rgba(255,255,255,0.24), transparent 55%),
-        linear-gradient(135deg, rgba(255,106,42,0.40), rgba(90,59,35,0.55)),
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(0,0,0,0.35));
+        linear-gradient(135deg, rgba(255,106,42,0.40), rgba(90,59,35,0.55));
       border: 1px solid rgba(243,239,230,0.18);
       box-shadow: var(--shadow2);
     }
-    .brand h1{
-      margin:0;
-      font-family: var(--title);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-weight: 700;
-      font-size: 18px;
-      line-height:1.1;
-    }
-    .brand small{
-      display:block;
-      color: var(--muted);
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      margin-top:2px;
-      font-size: 11px;
-      text-transform: uppercase;
-    }
-
-    .nav{
-      display:flex; align-items:center; gap:14px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-    .nav a{
-      color: var(--muted);
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      padding: 8px 10px;
-      border-radius: 12px;
-      border: 1px solid transparent;
-      transition: 160ms ease;
-    }
-    .nav a:hover{
-      color: var(--text);
-      border-color: var(--line);
+    .search{
+      display:flex; align-items:center; gap:10px; flex:1; max-width:520px;
       background: rgba(255,255,255,0.03);
-    }
-
-    /* Hero */
-    .hero{
-      padding: 42px 0 22px;
-    }
-    .hero-card{
-      border-radius: var(--radius);
       border: 1px solid rgba(243,239,230,0.14);
-      background:
-        radial-gradient(1000px 450px at 20% 0%, rgba(255,106,42,0.13), transparent 60%),
-        radial-gradient(800px 380px at 85% 0%, rgba(154,163,173,0.10), transparent 55%),
-        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-      box-shadow: var(--shadow);
-      padding: 26px;
-      overflow:hidden;
-      position:relative;
+      border-radius: 14px;
+      padding: 10px 12px;
     }
-    .hero-card:before{
-      /* subtle “brushed steel” shine */
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        repeating-linear-gradient(110deg,
-          rgba(255,255,255,0.06) 0px,
-          rgba(255,255,255,0.06) 1px,
-          transparent 1px,
-          transparent 10px
-        );
-      opacity:0.12;
-      pointer-events:none;
-      mix-blend-mode: overlay;
+    .search input{
+      width:100%; border:0; outline:0;
+      background:transparent; color:var(--text);
+      font-size:14px;
     }
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 18px;
-      position:relative;
-    }
-    @media (max-width: 860px){
-      .hero-grid{ grid-template-columns: 1fr; }
-    }
-
-    .hero h2{
-      margin: 0 0 10px;
-      font-family: var(--title);
-      font-size: clamp(28px, 4vw, 46px);
-      line-height: 1.05;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-    .hero p{
-      margin: 0 0 16px;
-      color: var(--muted);
-      max-width: 58ch;
-      font-size: 15px;
-      line-height: 1.6;
-    }
-
-    .pillrow{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px; }
     .pill{
       border: 1px solid rgba(243,239,230,0.14);
       background: rgba(255,255,255,0.03);
@@ -185,83 +81,146 @@
       font-size: 12px;
       color: var(--muted);
       letter-spacing: 0.03em;
+      white-space:nowrap;
     }
 
-    .cta{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin-top: 18px;
+    /* Layout */
+    .main{
+      display:grid;
+      grid-template-columns: 320px 1fr;
+      gap: 16px;
+      padding: 18px 0 46px;
     }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      font-size: 12px;
+    @media (max-width: 980px){
+      .main{ grid-template-columns: 1fr; }
+    }
+
+    /* Sidebar */
+    .side{
+      border-radius: var(--radius);
+      border: 1px solid rgba(243,239,230,0.14);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+    }
+    .side-head{
+      padding: 14px 14px 10px;
+      border-bottom: 1px solid rgba(243,239,230,0.10);
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+    }
+    .side-head h2{
+      margin:0;
+      font-size: 14px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .clear-btn{
       border: 1px solid rgba(243,239,230,0.16);
       background: rgba(255,255,255,0.03);
-      transition: 160ms ease;
-    }
-    .btn:hover{
-      transform: translateY(-1px);
-      border-color: rgba(255,106,42,0.35);
-      box-shadow: 0 14px 40px rgba(0,0,0,0.45);
-    }
-    .btn-primary{
-      border-color: rgba(255,106,42,0.35);
-      background:
-        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.18), transparent 60%),
-        linear-gradient(135deg, rgba(255,106,42,0.55), rgba(90,59,35,0.58));
-    }
-    .sidepanel{
-      border: 1px solid rgba(243,239,230,0.14);
-      background: rgba(255,255,255,0.03);
-      border-radius: 16px;
-      padding: 16px;
-      height: 100%;
-    }
-    .sidepanel h3{
-      margin:0 0 8px;
-      font-family: var(--title);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-    .sidepanel ul{
-      margin: 0; padding-left: 18px;
       color: var(--muted);
-      line-height: 1.7;
-      font-size: 14px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      font-weight:900;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      font-size: 11px;
+      cursor:pointer;
+    }
+    .clear-btn:hover{ color:var(--text); border-color: rgba(255,106,42,0.35); }
+
+    .tree{
+      padding: 6px;
+    }
+    details{
+      border: 1px solid transparent;
+      border-radius: 14px;
+      padding: 8px;
+    }
+    details[open]{ background: rgba(255,255,255,0.02); border-color: rgba(243,239,230,0.10); }
+    summary{
+      list-style:none;
+      cursor:pointer;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+      padding: 8px 8px;
+      border-radius: 12px;
+      user-select:none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+
+    .sum-left{ display:flex; align-items:center; gap:10px; }
+    .icon{
+      width:28px; height:28px; border-radius:10px;
+      display:flex; align-items:center; justify-content:center;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(243,239,230,0.12);
+      font-size: 16px;
+    }
+    .cat-title{
+      font-weight:900;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      font-size: 12px;
+    }
+    .chev{ color: var(--muted); font-weight:900; }
+
+    .sublist{
+      padding: 6px 6px 10px 44px;
+      display:flex; flex-direction:column; gap:6px;
+    }
+    .subbtn{
+      text-align:left;
+      border: 1px solid rgba(243,239,230,0.12);
+      background: rgba(255,255,255,0.02);
+      color: var(--muted);
+      padding: 10px 10px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-weight:800;
+      letter-spacing:.02em;
+      font-size: 13px;
+    }
+    .subbtn:hover{ color: var(--text); border-color: rgba(255,106,42,0.35); }
+    .subbtn.active{
+      color: var(--text);
+      border-color: rgba(255,106,42,0.45);
+      background: rgba(255,106,42,0.10);
     }
 
-    /* Catalog */
-    .section{
-      padding: 18px 0 44px;
+    /* Content */
+    .content{
+      border-radius: var(--radius);
+      border: 1px solid rgba(243,239,230,0.14);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      box-shadow: var(--shadow);
+      overflow:hidden;
     }
-    .section-title{
-      display:flex; align-items:baseline; justify-content:space-between;
-      gap:14px;
-      margin: 18px 0 14px;
+    .content-head{
+      padding: 14px;
+      border-bottom: 1px solid rgba(243,239,230,0.10);
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      flex-wrap:wrap;
     }
-    .section-title h3{
+    .content-head h3{
       margin:0;
-      font-family: var(--title);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-size: 18px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size: 14px;
     }
-    .section-title span{
+    .crumb{
       color: var(--muted);
-      font-size: 13px;
+      font-weight:800;
+      letter-spacing:.03em;
+      font-size: 12px;
     }
 
     .grid{
+      padding: 14px;
       display:grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
     }
-    @media (max-width: 980px){ .grid{ grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 1120px){ .grid{ grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 640px){ .grid{ grid-template-columns: 1fr; } }
 
     .card{
@@ -270,27 +229,26 @@
       background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
       box-shadow: var(--shadow2);
       overflow:hidden;
-      position:relative;
     }
     .photo{
       aspect-ratio: 16/11;
       background:
         radial-gradient(circle at 25% 20%, rgba(255,255,255,0.10), transparent 60%),
-        linear-gradient(135deg, rgba(154,163,173,0.22), rgba(0,0,0,0.40)),
-        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.35));
+        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(0,0,0,0.40));
+      border-bottom: 1px solid rgba(243,239,230,0.10);
+      background-size: cover;
+      background-position: center;
       display:flex; align-items:center; justify-content:center;
-      border-bottom: 1px solid rgba(243,239,230,0.12);
       color: rgba(243,239,230,0.45);
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
       font-size: 12px;
     }
-    .card-inner{ padding: 14px; }
+    .card-inner{ padding: 12px; }
     .meta{
       display:flex; align-items:center; justify-content:space-between;
-      gap:12px;
-      margin-bottom: 8px;
+      gap:10px; margin-bottom: 8px;
     }
     .tag{
       border: 1px solid rgba(255,106,42,0.28);
@@ -301,67 +259,37 @@
       font-size: 11px;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      font-weight: 800;
+      font-weight: 900;
       white-space: nowrap;
     }
     .price{
-      font-family: var(--title);
-      letter-spacing: 0.06em;
-      font-size: 18px;
+      font-weight: 1000;
+      letter-spacing:.06em;
     }
-    .name{
-      margin: 0 0 8px;
-      font-weight: 800;
-      letter-spacing: 0.02em;
-      font-size: 15px;
-    }
-    .desc{
-      margin: 0 0 12px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.55;
-      min-height: 44px;
-    }
-    .actions{
-      display:flex; gap:10px; flex-wrap:wrap;
-    }
-    .mini{
+    .name{ margin:0 0 8px; font-weight: 950; }
+    .desc{ margin:0 0 12px; color: var(--muted); font-size: 13px; line-height: 1.55; min-height: 38px; }
+    .actions{ display:flex; gap:10px; flex-wrap:wrap; }
+    .btn{
       padding: 10px 12px;
       border-radius: 14px;
       font-size: 12px;
-      font-weight: 900;
+      font-weight: 1000;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       border: 1px solid rgba(243,239,230,0.14);
       background: rgba(255,255,255,0.03);
+      cursor:pointer;
     }
-    .mini.primary{
+    .btn.primary{
       border-color: rgba(255,106,42,0.32);
       background:
         radial-gradient(circle at 30% 20%, rgba(255,255,255,0.16), transparent 60%),
         linear-gradient(135deg, rgba(255,106,42,0.50), rgba(90,59,35,0.55));
     }
-
-    /* Footer */
-    footer{
-      border-top: 1px solid var(--line);
-      padding: 22px 0 30px;
+    .empty{
+      padding: 26px 14px;
       color: var(--muted);
-      font-size: 13px;
-    }
-    .footer-grid{
-      display:grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 14px;
-    }
-    @media (max-width: 860px){ .footer-grid{ grid-template-columns: 1fr; } }
-    .fineprint{ line-height: 1.7; }
-
-    /* “Rustic separator” */
-    .divider{
-      height:1px;
-      background: linear-gradient(90deg, transparent, rgba(255,106,42,0.35), rgba(243,239,230,0.18), transparent);
-      margin: 18px 0;
+      text-align:center;
     }
   </style>
 </head>
@@ -370,153 +298,314 @@
   <div class="topbar">
     <div class="container topbar-inner">
       <div class="brand">
-        <div class="badge" aria-hidden="true"></div>
-        <div>
-          <h1>Wilson Resale Garage</h1>
-          <small>Modern • Rustic • Honest Deals</small>
-        </div>
+        <div class="logo" aria-hidden="true"></div>
+        <div>Kerry’s Lot</div>
       </div>
-      <nav class="nav">
-        <a href="#catalog">Catalog</a>
-        <a href="#how">How it Works</a>
-        <a href="#contact">Contact</a>
-      </nav>
+
+      <div class="search" title="Search item titles">
+        🔎 <input id="q" placeholder="Search (phones, drill, couch…)" />
+      </div>
+
+      <div class="pill" id="countPill">0 items</div>
     </div>
   </div>
 
-  <header class="hero">
-    <div class="container">
-      <div class="hero-card">
-        <div class="hero-grid">
-          <div>
-            <h2>Rugged Finds.<br/>Clean Listings.</h2>
-            <p>
-              Used items with straight-up descriptions. Local pickup or shipping.
-              Tap “Buy Now” to pay, then we confirm pickup/shipping details.
-            </p>
-
-            <div class="pillrow">
-              <div class="pill">✅ Tested / verified when possible</div>
-              <div class="pill">📍 Local pickup available</div>
-              <div class="pill">🚚 Shipping optional</div>
-              <div class="pill">🧾 Honest condition notes</div>
-            </div>
-
-            <div class="cta">
-              <a class="btn btn-primary" href="#catalog">Browse Items</a>
-              <a class="btn" href="#contact">Sell to Us</a>
-            </div>
-          </div>
-
-          <aside class="sidepanel" id="how">
-            <h3>How Buying Works</h3>
-            <ul>
-              <li>Pick an item in the catalog</li>
-              <li>Hit “Buy Now” (PayPal / other link)</li>
-              <li>You’ll receive a payment receipt</li>
-              <li>We text/email pickup or shipping confirmation</li>
-            </ul>
-            <div class="divider"></div>
-            <h3>Condition Grades</h3>
-            <ul>
-              <li><b>New</b> / <b>Like New</b></li>
-              <li><b>Good</b> (normal wear)</li>
-              <li><b>Fair</b> (works, cosmetic issues)</li>
-              <li><b>Parts</b> (not guaranteed)</li>
-            </ul>
-          </aside>
-        </div>
+  <div class="container main">
+    <aside class="side">
+      <div class="side-head">
+        <h2>Categories</h2>
+        <button class="clear-btn" id="clearFilters">Clear</button>
       </div>
-    </div>
-  </header>
+      <div class="tree" id="categoryTree"></div>
+    </aside>
 
-  <main class="section" id="catalog">
-    <div class="container">
-      <div class="section-title">
+    <section class="content">
+      <div class="content-head">
         <h3>Catalog</h3>
-        <span>Update listings by editing this page — free forever.</span>
+        <div class="crumb" id="crumb">All items</div>
       </div>
-
-      <div class="grid">
-        <!-- ITEM 1 -->
-        <article class="card">
-          <div class="photo">Add Photo</div>
-          <div class="card-inner">
-            <div class="meta">
-              <span class="tag">Good</span>
-              <span class="price">$120</span>
-            </div>
-            <h4 class="name">Item Name Example</h4>
-            <p class="desc">Short, honest description. Mention flaws. Include what’s included.</p>
-            <div class="actions">
-              <!-- Replace href with your PayPal “Buy Now” link or payment page -->
-              <a class="mini primary" href="#" target="_blank" rel="noopener">Buy Now</a>
-              <a class="mini" href="#contact">Ask a Question</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- ITEM 2 -->
-        <article class="card">
-          <div class="photo">Add Photo</div>
-          <div class="card-inner">
-            <div class="meta">
-              <span class="tag">Like New</span>
-              <span class="price">$65</span>
-            </div>
-            <h4 class="name">Another Item</h4>
-            <p class="desc">Condition, key specs, pickup area, shipping availability.</p>
-            <div class="actions">
-              <a class="mini primary" href="#" target="_blank" rel="noopener">Buy Now</a>
-              <a class="mini" href="#contact">Ask a Question</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- ITEM 3 -->
-        <article class="card">
-          <div class="photo">Add Photo</div>
-          <div class="card-inner">
-            <div class="meta">
-              <span class="tag">Fair</span>
-              <span class="price">$30</span>
-            </div>
-            <h4 class="name">Tool / Part / Electronics</h4>
-            <p class="desc">Be transparent: “works, but has cosmetic wear” builds trust.</p>
-            <div class="actions">
-              <a class="mini primary" href="#" target="_blank" rel="noopener">Buy Now</a>
-              <a class="mini" href="#contact">Ask a Question</a>
-            </div>
-          </div>
-        </article>
+      <div class="grid" id="grid"></div>
+      <div class="empty" id="empty" style="display:none;">
+        No items match those filters yet.
       </div>
-
-      <div class="divider"></div>
-    </div>
-  </main>
-
-  <footer id="contact">
-    <div class="container footer-grid">
-      <div class="fineprint">
-        <b style="letter-spacing:.06em; text-transform:uppercase;">Contact</b><br/>
-        Email: <a href="mailto:you@example.com">you@example.com</a><br/>
-        Text: <a href="tel:+1XXXXXXXXXX">+1 (XXX) XXX-XXXX</a><br/><br/>
-        <b style="letter-spacing:.06em; text-transform:uppercase;">Pickup Area</b><br/>
-        Humble / Houston area (update this line).
-      </div>
-
-      <div class="fineprint">
-        <b style="letter-spacing:.06em; text-transform:uppercase;">Policies</b><br/>
-        • Used items sold as described.<br/>
-        • Returns only if item is not as described (be clear).<br/>
-        • Shipping costs confirmed after purchase (or list flat rate).<br/><br/>
-        <span style="opacity:.7;">© <span id="year"></span> Wilson Resale Garage</span>
-      </div>
-    </div>
-  </footer>
+    </section>
+  </div>
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // 1) CATEGORY TREE (edit / expand as much as you want)
+    // Each category has: id, label, icon, and children (subcategories)
+    const CATEGORIES = [
+      {
+        id: "electronics", label: "Electronics", icon: "📱",
+        children: [
+          { id: "phones", label: "Cell Phones", icon: "📱" },
+          { id: "computers", label: "Computers", icon: "🖥️" },
+          { id: "laptops", label: "Laptops", icon: "💻" },
+          { id: "tablets", label: "Tablets", icon: "📲" },
+          { id: "tv_audio", label: "TV & Audio", icon: "📺" },
+          { id: "gaming", label: "Gaming", icon: "🎮" },
+          { id: "cameras", label: "Cameras", icon: "📷" },
+          { id: "accessories", label: "Accessories", icon: "🔌" },
+        ]
+      },
+      {
+        id: "tools", label: "Tools", icon: "🛠️",
+        children: [
+          { id: "power_tools", label: "Power Tools", icon: "🔩" },
+          { id: "hand_tools", label: "Hand Tools", icon: "🔧" },
+          { id: "yard_tools", label: "Yard Tools", icon: "🌿" },
+          { id: "ladders", label: "Ladders", icon: "🪜" },
+          { id: "toolboxes", label: "Toolboxes", icon: "🧰" },
+          { id: "hardware", label: "Hardware", icon: "⚙️" },
+        ]
+      },
+      {
+        id: "furniture", label: "Furniture", icon: "🛋️",
+        children: [
+          { id: "living_room", label: "Living Room", icon: "🛋️" },
+          { id: "bedroom", label: "Bedroom", icon: "🛏️" },
+          { id: "dining", label: "Dining", icon: "🍽️" },
+          { id: "office", label: "Office", icon: "🪑" },
+          { id: "outdoor", label: "Outdoor", icon: "🌤️" },
+          { id: "storage", label: "Storage", icon: "🗄️" },
+        ]
+      },
+      {
+        id: "clothing", label: "Clothing", icon: "👕",
+        children: [
+          { id: "mens", label: "Men’s", icon: "👕" },
+          { id: "womens", label: "Women’s", icon: "👗" },
+          { id: "kids", label: "Kids", icon: "🧒" },
+          { id: "shoes", label: "Shoes", icon: "👟" },
+          { id: "hats", label: "Hats", icon: "🧢" },
+          { id: "bags", label: "Bags", icon: "👜" },
+        ]
+      },
+      {
+        id: "auto", label: "Auto", icon: "🚗",
+        children: [
+          { id: "parts", label: "Parts", icon: "⚙️" },
+          { id: "wheels", label: "Wheels & Tires", icon: "🛞" },
+          { id: "audio_auto", label: "Car Audio", icon: "🔊" },
+          { id: "tools_auto", label: "Auto Tools", icon: "🧰" },
+          { id: "detailing", label: "Detailing", icon: "🧽" },
+        ]
+      },
+      {
+        id: "home", label: "Home", icon: "🏠",
+        children: [
+          { id: "kitchen", label: "Kitchen", icon: "🍳" },
+          { id: "appliances", label: "Appliances", icon: "🧊" },
+          { id: "decor", label: "Decor", icon: "🕯️" },
+          { id: "bath", label: "Bath", icon: "🛁" },
+          { id: "lighting", label: "Lighting", icon: "💡" },
+        ]
+      },
+      {
+        id: "other", label: "Other", icon: "📦",
+        children: [
+          { id: "collectibles", label: "Collectibles", icon: "🪙" },
+          { id: "music", label: "Music Gear", icon: "🎸" },
+          { id: "sports", label: "Sports", icon: "🏀" },
+          { id: "misc", label: "Misc", icon: "📦" },
+        ]
+      }
+    ];
+
+    // 2) ITEMS (add your real items here)
+    // category = top-level category id, subcategory = child id
+    const ITEMS = [
+      {
+        id: "iphone14",
+        title: "iPhone 14 Pro Max (Unlocked)",
+        price: 650,
+        condition: "Good",
+        category: "electronics",
+        subcategory: "phones",
+        photo: "assets/item1.jpg", // upload a real image to assets/
+        desc: "Unlocked. Battery health strong. Minor normal wear. Includes case.",
+        buyLink: "#" // paste your PayPal / CashApp link here
+      },
+      {
+        id: "dewalt",
+        title: "DeWalt Drill Kit",
+        price: 90,
+        condition: "Good",
+        category: "tools",
+        subcategory: "power_tools",
+        photo: "", // leave blank if you don’t have photo yet
+        desc: "Works great. Includes charger + 2 batteries.",
+        buyLink: "#"
+      },
+      {
+        id: "couch",
+        title: "Rustic Leather-Style Couch",
+        price: 120,
+        condition: "Fair",
+        category: "furniture",
+        subcategory: "living_room",
+        photo: "",
+        desc: "Solid frame. Cosmetic wear shown in photos.",
+        buyLink: "#"
+      },
+      {
+        id: "boots",
+        title: "Men’s Work Boots",
+        price: 35,
+        condition: "Good",
+        category: "clothing",
+        subcategory: "shoes",
+        photo: "",
+        desc: "Size 10. Good tread. Cleaned.",
+        buyLink: "#"
+      }
+    ];
+
+    // STATE
+    let active = { category: null, subcategory: null, query: "" };
+
+    // Build category tree UI
+    const categoryTree = document.getElementById("categoryTree");
+    const grid = document.getElementById("grid");
+    const empty = document.getElementById("empty");
+    const crumb = document.getElementById("crumb");
+    const q = document.getElementById("q");
+    const countPill = document.getElementById("countPill");
+
+    function renderTree(){
+      categoryTree.innerHTML = "";
+
+      CATEGORIES.forEach(cat => {
+        const details = document.createElement("details");
+        details.open = true;
+
+        const summary = document.createElement("summary");
+        summary.innerHTML = `
+          <div class="sum-left">
+            <div class="icon">${cat.icon}</div>
+            <div class="cat-title">${cat.label}</div>
+          </div>
+          <div class="chev">▾</div>
+        `;
+
+        // Clicking the category name (summary) sets category filter (and clears subcategory)
+        summary.addEventListener("click", (e) => {
+          // summary toggles details by default; we still want that.
+          // But also set the filter.
+          setFilter(cat.id, null);
+        });
+
+        const sublist = document.createElement("div");
+        sublist.className = "sublist";
+
+        cat.children.forEach(sub => {
+          const btn = document.createElement("button");
+          btn.className = "subbtn";
+          btn.dataset.cat = cat.id;
+          btn.dataset.sub = sub.id;
+          btn.textContent = `${sub.icon} ${sub.label}`;
+          btn.addEventListener("click", () => setFilter(cat.id, sub.id));
+          sublist.appendChild(btn);
+        });
+
+        details.appendChild(summary);
+        details.appendChild(sublist);
+        categoryTree.appendChild(details);
+      });
+    }
+
+    function setFilter(categoryId, subcategoryId){
+      active.category = categoryId;
+      active.subcategory = subcategoryId;
+      updateActiveButtons();
+      renderItems();
+    }
+
+    function clearFilter(){
+      active.category = null;
+      active.subcategory = null;
+      active.query = "";
+      q.value = "";
+      updateActiveButtons();
+      renderItems();
+    }
+
+    function updateActiveButtons(){
+      document.querySelectorAll(".subbtn").forEach(b => {
+        const match = (b.dataset.cat === active.category && b.dataset.sub === active.subcategory);
+        b.classList.toggle("active", match);
+      });
+
+      if(!active.category){
+        crumb.textContent = "All items";
+      } else {
+        const cat = CATEGORIES.find(c => c.id === active.category);
+        const sub = active.subcategory ? cat?.children?.find(s => s.id === active.subcategory) : null;
+        crumb.textContent = sub ? `${cat.label} → ${sub.label}` : cat?.label || "Filtered";
+      }
+    }
+
+    function matches(item){
+      if(active.category && item.category !== active.category) return false;
+      if(active.subcategory && item.subcategory !== active.subcategory) return false;
+
+      if(active.query){
+        const hay = (item.title + " " + item.desc).toLowerCase();
+        if(!hay.includes(active.query.toLowerCase())) return false;
+      }
+      return true;
+    }
+
+    function money(n){
+      return "$" + Number(n).toFixed(0);
+    }
+
+    function renderItems(){
+      const list = ITEMS.filter(matches);
+
+      countPill.textContent = `${list.length} item${list.length === 1 ? "" : "s"}`;
+
+      grid.innerHTML = "";
+      empty.style.display = list.length ? "none" : "block";
+
+      list.forEach(item => {
+        const card = document.createElement("article");
+        card.className = "card";
+
+        const photoStyle = item.photo
+          ? `style="background-image:url('${item.photo}');"`
+          : "";
+
+        card.innerHTML = `
+          <div class="photo" ${photoStyle}>${item.photo ? "" : "Add Photo"}</div>
+          <div class="card-inner">
+            <div class="meta">
+              <span class="tag">${item.condition}</span>
+              <span class="price">${money(item.price)}</span>
+            </div>
+            <h4 class="name">${item.title}</h4>
+            <p class="desc">${item.desc}</p>
+            <div class="actions">
+              <a class="btn primary" href="${item.buyLink}" target="_blank" rel="noopener">Buy Now</a>
+              <button class="btn" onclick="alert('Contact: add your phone/email in the code!')">Ask</button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Events
+    document.getElementById("clearFilters").addEventListener("click", clearFilter);
+    q.addEventListener("input", () => {
+      active.query = q.value.trim();
+      renderItems();
+    });
+
+    // Init
+    renderTree();
+    updateActiveButtons();
+    renderItems();
   </script>
 </body>
 </html>
