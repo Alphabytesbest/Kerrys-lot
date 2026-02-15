@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Wilson Resale Garage</title>
+  <meta name="description" content="Modern rustic resale — quality used items, honest descriptions, local pickup or shipping." />
+
+  <!-- Free fonts (optional). If you want zero external calls, delete these 2 lines. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Harley-ish: charcoal, leather, warm cream, ember accent */
+      --bg: #0c0d0f;
+      --panel: rgba(255,255,255,0.05);
+      --panel2: rgba(255,255,255,0.03);
+      --text: #f3efe6;
+      --muted: rgba(243,239,230,0.72);
+      --line: rgba(243,239,230,0.12);
+
+      --leather: #5a3b23;
+      --rust: #a65a2a;
+      --ember: #ff6a2a;
+      --steel: #9aa3ad;
+
+      --radius: 18px;
+      --shadow: 0 18px 70px rgba(0,0,0,0.55);
+      --shadow2: 0 10px 30px rgba(0,0,0,0.45);
+
+      --title: "Oswald", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --body: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    /* Subtle “rustic texture” without images (uses layered gradients) */
+    body{
+      margin:0;
+      color: var(--text);
+      font-family: var(--body);
+      background:
+        radial-gradient(1200px 800px at 20% -10%, rgba(166,90,42,0.14), transparent 60%),
+        radial-gradient(900px 600px at 80% 0%, rgba(154,163,173,0.10), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,0.04), transparent 22%),
+        repeating-linear-gradient(90deg,
+          rgba(255,255,255,0.02) 0px,
+          rgba(255,255,255,0.02) 1px,
+          transparent 1px,
+          transparent 7px
+        ),
+        linear-gradient(180deg, #07080a 0%, #0c0d0f 40%, #07080a 100%);
+      min-height: 100vh;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .container{ width:min(1120px, 92vw); margin:0 auto; }
+
+    /* Top bar */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(12px);
+      background: rgba(12,13,15,0.72);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 14px 0;
+      gap:16px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+    }
+    .badge{
+      width:40px; height:40px; border-radius: 12px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.24), transparent 55%),
+        linear-gradient(135deg, rgba(255,106,42,0.40), rgba(90,59,35,0.55)),
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(0,0,0,0.35));
+      border: 1px solid rgba(243,239,230,0.18);
+      box-shadow: var(--shadow2);
+    }
+    .brand h1{
+      margin:0;
+      font-family: var(--title);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 18px;
+      line-height:1.1;
+    }
+    .brand small{
+      display:block;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      margin-top:2px;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .nav{
+      display:flex; align-items:center; gap:14px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav a{
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      transition: 160ms ease;
+    }
+    .nav a:hover{
+      color: var(--text);
+      border-color: var(--line);
+      background: rgba(255,255,255,0.03);
+    }
+
+    /* Hero */
+    .hero{
+      padding: 42px 0 22px;
+    }
+    .hero-card{
+      border-radius: var(--radius);
+      border: 1px solid rgba(243,239,230,0.14);
+      background:
+        radial-gradient(1000px 450px at 20% 0%, rgba(255,106,42,0.13), transparent 60%),
+        radial-gradient(800px 380px at 85% 0%, rgba(154,163,173,0.10), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      box-shadow: var(--shadow);
+      padding: 26px;
+      overflow:hidden;
+      position:relative;
+    }
+    .hero-card:before{
+      /* subtle “brushed steel” shine */
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        repeating-linear-gradient(110deg,
+          rgba(255,255,255,0.06) 0px,
+          rgba(255,255,255,0.06) 1px,
+          transparent 1px,
+          transparent 10px
+        );
+      opacity:0.12;
+      pointer-events:none;
+      mix-blend-mode: overlay;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+      position:relative;
+    }
+    @media (max-width: 860px){
+      .hero-grid{ grid-template-columns: 1fr; }
+    }
+
+    .hero h2{
+      margin: 0 0 10px;
+      font-family: var(--title);
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.05;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .hero p{
+      margin: 0 0 16px;
+      color: var(--muted);
+      max-width: 58ch;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .pillrow{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px; }
+    .pill{
+      border: 1px solid rgba(243,239,230,0.14);
+      background: rgba(255,255,255,0.03);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+
+    .cta{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top: 18px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 12px;
+      border: 1px solid rgba(243,239,230,0.16);
+      background: rgba(255,255,255,0.03);
+      transition: 160ms ease;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,106,42,0.35);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+    }
+    .btn-primary{
+      border-color: rgba(255,106,42,0.35);
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.18), transparent 60%),
+        linear-gradient(135deg, rgba(255,106,42,0.55), rgba(90,59,35,0.58));
+    }
+    .sidepanel{
+      border: 1px solid rgba(243,239,230,0.14);
+      background: rgba(255,255,255,0.03);
+      border-radius: 16px;
+      padding: 16px;
+      height: 100%;
+    }
+    .sidepanel h3{
+      margin:0 0 8px;
+      font-family: var(--title);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .sidepanel ul{
+      margin: 0; padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    /* Catalog */
+    .section{
+      padding: 18px 0 44px;
+    }
+    .section-title{
+      display:flex; align-items:baseline; justify-content:space-between;
+      gap:14px;
+      margin: 18px 0 14px;
+    }
+    .section-title h3{
+      margin:0;
+      font-family: var(--title);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 18px;
+    }
+    .section-title span{
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 980px){ .grid{ grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px){ .grid{ grid-template-columns: 1fr; } }
+
+    .card{
+      border-radius: var(--radius);
+      border: 1px solid rgba(243,239,230,0.14);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+      position:relative;
+    }
+    .photo{
+      aspect-ratio: 16/11;
+      background:
+        radial-gradient(circle at 25% 20%, rgba(255,255,255,0.10), transparent 60%),
+        linear-gradient(135deg, rgba(154,163,173,0.22), rgba(0,0,0,0.40)),
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.35));
+      display:flex; align-items:center; justify-content:center;
+      border-bottom: 1px solid rgba(243,239,230,0.12);
+      color: rgba(243,239,230,0.45);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+    .card-inner{ padding: 14px; }
+    .meta{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      margin-bottom: 8px;
+    }
+    .tag{
+      border: 1px solid rgba(255,106,42,0.28);
+      color: rgba(255,205,180,0.92);
+      background: rgba(255,106,42,0.08);
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .price{
+      font-family: var(--title);
+      letter-spacing: 0.06em;
+      font-size: 18px;
+    }
+    .name{
+      margin: 0 0 8px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      font-size: 15px;
+    }
+    .desc{
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+      min-height: 44px;
+    }
+    .actions{
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .mini{
+      padding: 10px 12px;
+      border-radius: 14px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1px solid rgba(243,239,230,0.14);
+      background: rgba(255,255,255,0.03);
+    }
+    .mini.primary{
+      border-color: rgba(255,106,42,0.32);
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.16), transparent 60%),
+        linear-gradient(135deg, rgba(255,106,42,0.50), rgba(90,59,35,0.55));
+    }
+
+    /* Footer */
+    footer{
+      border-top: 1px solid var(--line);
+      padding: 22px 0 30px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 14px;
+    }
+    @media (max-width: 860px){ .footer-grid{ grid-template-columns: 1fr; } }
+    .fineprint{ line-height: 1.7; }
+
+    /* “Rustic separator” */
+    .divider{
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(255,106,42,0.35), rgba(243,239,230,0.18), transparent);
+      margin: 18px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="badge" aria-hidden="true"></div>
+        <div>
+          <h1>Wilson Resale Garage</h1>
+          <small>Modern • Rustic • Honest Deals</small>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#catalog">Catalog</a>
+        <a href="#how">How it Works</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="container">
+      <div class="hero-card">
+        <div class="hero-grid">
+          <div>
+            <h2>Rugged Finds.<br/>Clean Listings.</h2>
+            <p>
+              Used items with straight-up descriptions. Local pickup or shipping.
+              Tap “Buy Now” to pay, then we confirm pickup/shipping details.
+            </p>
+
+            <div class="pillrow">
+              <div class="pill">✅ Tested / verified when possible</div>
+              <div class="pill">📍 Local pickup available</div>
+              <div class="pill">🚚 Shipping optional</div>
+              <div class="pill">🧾 Honest condition notes</div>
+            </div>
+
+            <div class="cta">
+              <a class="btn btn-primary" href="#catalog">Browse Items</a>
+              <a class="btn" href="#contact">Sell to Us</a>
+            </div>
+          </div>
+
+          <aside class="sidepanel" id="how">
+            <h3>How Buying Works</h3>
+            <ul>
+              <li>Pick an item in the catalog</li>
+              <li>Hit “Buy Now” (PayPal / other link)</li>
+              <li>You’ll receive a payment receipt</li>
+              <li>We text/email pickup or shipping confirmation</li>
+            </ul>
+            <div class="divider"></div>
+            <h3>Condition Grades</h3>
+            <ul>
+              <li><b>New</b> / <b>Like New</b></li>
+              <li><b>Good</b> (normal wear)</li>
+              <li><b>Fair</b> (works, cosmetic issues)</li>
+              <li><b>Parts</b> (not guaranteed)</li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="section" id="catalog">
+    <div class="container">
+      <div class="section-title">
+        <h3>Catalog</h3>
+        <span>Update listings by editing this page — free forever.</span>
+      </div>
+
+      <div class="grid">
+        <!-- ITEM 1 -->
+        <article class="card">
+          <div class="photo">Add Photo</div>
+          <div class="card-inner">
+            <div class="meta">
+              <span class="tag">Good</span>
+              <span class="price">$120</span>
+            </div>
+            <h4 class="name">Item Name Example</h4>
+            <p class="desc">Short, honest description. Mention flaws. Include what’s included.</p>
+            <div class="actions">
+              <!-- Replace href with your PayPal “Buy Now” link or payment page -->
+              <a class="mini primary" href="#" target="_blank" rel="noopener">Buy Now</a>
+              <a class="mini" href="#contact">Ask a Question</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ITEM 2 -->
+        <article class="card">
+          <div class="photo">Add Photo</div>
+          <div class="card-inner">
+            <div class="meta">
+              <span class="tag">Like New</span>
+              <span class="price">$65</span>
+            </div>
+            <h4 class="name">Another Item</h4>
+            <p class="desc">Condition, key specs, pickup area, shipping availability.</p>
+            <div class="actions">
+              <a class="mini primary" href="#" target="_blank" rel="noopener">Buy Now</a>
+              <a class="mini" href="#contact">Ask a Question</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ITEM 3 -->
+        <article class="card">
+          <div class="photo">Add Photo</div>
+          <div class="card-inner">
+            <div class="meta">
+              <span class="tag">Fair</span>
+              <span class="price">$30</span>
+            </div>
+            <h4 class="name">Tool / Part / Electronics</h4>
+            <p class="desc">Be transparent: “works, but has cosmetic wear” builds trust.</p>
+            <div class="actions">
+              <a class="mini primary" href="#" target="_blank" rel="noopener">Buy Now</a>
+              <a class="mini" href="#contact">Ask a Question</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="divider"></div>
+    </div>
+  </main>
+
+  <footer id="contact">
+    <div class="container footer-grid">
+      <div class="fineprint">
+        <b style="letter-spacing:.06em; text-transform:uppercase;">Contact</b><br/>
+        Email: <a href="mailto:you@example.com">you@example.com</a><br/>
+        Text: <a href="tel:+1XXXXXXXXXX">+1 (XXX) XXX-XXXX</a><br/><br/>
+        <b style="letter-spacing:.06em; text-transform:uppercase;">Pickup Area</b><br/>
+        Humble / Houston area (update this line).
+      </div>
+
+      <div class="fineprint">
+        <b style="letter-spacing:.06em; text-transform:uppercase;">Policies</b><br/>
+        • Used items sold as described.<br/>
+        • Returns only if item is not as described (be clear).<br/>
+        • Shipping costs confirmed after purchase (or list flat rate).<br/><br/>
+        <span style="opacity:.7;">© <span id="year"></span> Wilson Resale Garage</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
