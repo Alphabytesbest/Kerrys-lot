@@ -332,8 +332,7 @@
   </div>
 
   <script>
-    // 1) CATEGORY TREE (edit / expand as much as you want)
-    // Each category has: id, label, icon, and children (subcategories)
+    // 1) CATEGORY TREE
     const CATEGORIES = [
       {
         id: "electronics", label: "Electronics", icon: "📱",
@@ -412,54 +411,54 @@
       }
     ];
 
-    // 2) ITEMS (add your real items here)
-    // category = top-level category id, subcategory = child id
+    // 2) ITEMS (YOUR LISTINGS)
+    // IMPORTANT: Make sure these image files exist in /assets with EXACT same names:
+    // item1.jpg, djtable1.jpg, djtable2.jpg, violin.jpg
     const ITEMS = [
       {
-        id: "iphone14",
-        title: "iPhone 14 Pro Max 1Tb memory (Unlocked)",
+        id: "iphone14pro1tb",
+        title: "iPhone 14 Pro Max — 1TB (Unlocked) — Brand New",
         price: 650,
         condition: "New",
         category: "electronics",
         subcategory: "phones",
-        photo: "assets/item1.jpg", // upload a real image to assets/
-        desc: "Unlocked. Battery health strong. Minor normal wear. Includes case.",
-        buyLink: "#" // paste your PayPal / CashApp link here
+        photo: "assets/item1.jpg",
+        desc: "Brand new. Unlocked. 1TB storage. Ready to activate.",
+        buyLink: "#"
       },
       {
-        id: "The Akai MPK Mini Play MK3",
-        title: "Professional DJ Table",
+        id: "akai_mpk_mini_play_mk3",
+        title: "Akai MPK Mini Play MK3 (Portable MIDI Controller)",
         price: 125,
         condition: "Good",
         category: "other",
         subcategory: "music",
         photo: "assets/djtable1.jpg",
-        desc: "The Akai MPK Mini Play MK3 is a portable 25-key MIDI controller featuring a built-in speaker, 128+ onboard instrument/drum sounds, and 8 velocity-sensitive MPC pads. It operates on 3 AA batteries (14+ hours) or USB power, making it ideal for mobile music production. The unit includes a Gen 2 keybed, OLED display, and 4, or 8 depending on the model, rotary knobs for editing sounds and controlling DAWs.",
+        desc: "Portable 25-key MIDI controller with built-in speaker and onboard sounds. USB or battery powered.",
         buyLink: "#"
       },
       {
-        id: "The Akai Professional MPC",
-        title: "Professional DJ Table",
+        id: "akai_mpc_studio",
+        title: "Akai MPC Studio (USB MIDI Controller)",
         price: 250,
-        condition: "good",
-        category: "dj equitment",
+        condition: "Good",
+        category: "other",
         subcategory: "music",
-        photo: "",
-        desc: "The Akai Professional MPC Studio is a compact, USB-bus-powered MIDI controller designed to provide a complete, hands-on MPC music production experience when connected to a computer. It features 16 velocity-sensitive RGB pads, a multi-function touch strip for real-time control, and a color LCD for navigation. The unit integrates with the included MPC2 software, allowing for 128-track sequencing, sample editing, and plugin hosting.",
+        photo: "assets/djtable2.jpg",
+        desc: "Compact MPC-style controller for computer production. Pads + touch strip. Works with MPC software.",
         buyLink: "#"
       },
       {
-        id: "leroy vintage violin",
-        title: "Premium Violin – Excellent Condition",
+        id: "leroy_vintage_violin",
+        title: "Leroy Vintage Violin — Excellent Condition",
         price: 1200,
         condition: "Excellent",
         category: "other",
         subcategory: "music",
         photo: "assets/violin.jpg",
-        desc: "High-quality violin. Beautiful tone and craftsmanship. Ideal for advanced players.
+        desc: "High-quality violin. Beautiful tone and craftsmanship. Ideal for advanced players.",
         buyLink: "#"
-       },
-      
+      }
     ];
 
     // STATE
@@ -489,10 +488,7 @@
           <div class="chev">▾</div>
         `;
 
-        // Clicking the category name (summary) sets category filter (and clears subcategory)
-        summary.addEventListener("click", (e) => {
-          // summary toggles details by default; we still want that.
-          // But also set the filter.
+        summary.addEventListener("click", () => {
           setFilter(cat.id, null);
         });
 
@@ -588,7 +584,7 @@
             <p class="desc">${item.desc}</p>
             <div class="actions">
               <a class="btn primary" href="${item.buyLink}" target="_blank" rel="noopener">Buy Now</a>
-              <button class="btn" onclick="alert('Contact: add your phone/email in the code!')">Ask</button>
+              <button class="btn" onclick="alert('Add your contact info inside index.html (phone/email)')">Ask</button>
             </div>
           </div>
         `;
